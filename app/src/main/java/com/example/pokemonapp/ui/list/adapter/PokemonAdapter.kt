@@ -15,11 +15,13 @@ class PokemonAdapter(
     override fun onBindViewHolder(holder: PokemonViewHolder, position: Int) {
         getItem(position)?.let{
             holder.bind(it)
-            onItemClicked(it.url)
+            holder.onItemClicked={_->
+                onItemClicked(it.url)
+            }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokemonViewHolder {
-        return PokemonViewHolder(ItemPokemonBinding.inflate(LayoutInflater.from(context)))
+        return PokemonViewHolder(ItemPokemonBinding.inflate(LayoutInflater.from(context))){}
     }
 }

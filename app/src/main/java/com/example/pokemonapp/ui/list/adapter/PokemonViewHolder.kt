@@ -6,12 +6,16 @@ import com.example.pokemonapp.model.Result
 
 class PokemonViewHolder(
     private val binding: ItemPokemonBinding,
+    var onItemClicked: (url: String) -> Unit,
 
     ) : RecyclerView.ViewHolder(binding.root) {
     fun bind(item: Result) {
         binding.name.run {
             text = item.name
             isClickable = true
+            setOnClickListener{
+                onItemClicked(item.url)
+            }
         }
     }
 

@@ -9,8 +9,10 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.PagingData
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.pokemonapp.POKEMON_KEY
+import com.example.pokemonapp.R
 import com.example.pokemonapp.databinding.FragmentPokemonListBinding
-import com.example.pokemonapp.ui.MainViewModel
+import com.example.pokemonapp.ui.info.InfoFragment
 import com.example.pokemonapp.ui.list.adapter.PokemonAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -20,7 +22,7 @@ import kotlinx.coroutines.launch
 class PokemonListFragment : Fragment(){
 
     private lateinit var binding : FragmentPokemonListBinding
-    private val viewModel by viewModels<MainViewModel>()
+    private val viewModel by viewModels<PokemonListViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,8 +37,13 @@ class PokemonListFragment : Fragment(){
         super.onViewCreated(view, savedInstanceState)
         binding.pokemonListRecyclerView.run{
             if(adapter == null){
-                adapter = PokemonAdapter(requireContext()){
-                // onclick listener to open info fragment
+                adapter = PokemonAdapter(requireContext()){info->
+                parentFragmentManager.beginTransaction().replace(R.id.container, InfoFragment().apply{
+                    arguments =Bundle().apply{
+                        putSerializable(POKEMON_KEY,info)
+
+                    }
+                }).commit()
                 }
             }
             layoutManager = GridLayoutManager(requireContext(), 1)
