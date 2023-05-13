@@ -3,6 +3,7 @@ package com.example.pokemonapp.ui.list.adapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pokemonapp.databinding.ItemPokemonBinding
 import com.example.pokemonapp.model.Result
+import com.example.pokemonapp.toUpCase
 
 class PokemonViewHolder(
     private val binding: ItemPokemonBinding,
@@ -11,7 +12,7 @@ class PokemonViewHolder(
     ) : RecyclerView.ViewHolder(binding.root) {
     fun bind(item: Result) {
         binding.name.run {
-            text = item.name
+            text = item.name.toUpCase()
             isClickable = true
             setOnClickListener{
                 onItemClicked(item.url)

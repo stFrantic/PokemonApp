@@ -19,9 +19,9 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class PokemonListFragment : Fragment(){
+class PokemonListFragment : Fragment() {
 
-    private lateinit var binding : FragmentPokemonListBinding
+    private lateinit var binding: FragmentPokemonListBinding
     private val viewModel by viewModels<PokemonListViewModel>()
 
     override fun onCreateView(
@@ -35,15 +35,16 @@ class PokemonListFragment : Fragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.pokemonListRecyclerView.run{
-            if(adapter == null){
-                adapter = PokemonAdapter(requireContext()){info->
-                parentFragmentManager.beginTransaction().replace(R.id.container, InfoFragment().apply{
-                    arguments =Bundle().apply{
-                        putSerializable(POKEMON_KEY,info)
+        binding.pokemonListRecyclerView.run {
+            if (adapter == null) {
+                adapter = PokemonAdapter(requireContext()) { info ->
+                    parentFragmentManager.beginTransaction()
+                        .replace(R.id.container, InfoFragment().apply {
+                            arguments = Bundle().apply {
+                                putSerializable(POKEMON_KEY, info)
 
-                    }
-                }).commit()
+                            }
+                        }).commit()
                 }
             }
             layoutManager = GridLayoutManager(requireContext(), 1)
