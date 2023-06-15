@@ -38,11 +38,15 @@ class PokemonListFragment : Fragment() {
         binding.pokemonListRecyclerView.run {
             if (adapter == null) {
                 adapter = PokemonAdapter(requireContext()) { info ->
-                    parentFragmentManager.beginTransaction()
+                    parentFragmentManager.beginTransaction().setCustomAnimations(
+                        R.animator.open_info,
+                        R.animator.close_info,
+                        R.animator.open_info_2,
+                        R.animator.close_info_2
+                    )
                         .replace(R.id.container, InfoFragment().apply {
                             arguments = Bundle().apply {
                                 putSerializable(POKEMON_KEY, info)
-
                             }
                         }).commit()
                 }
@@ -60,4 +64,5 @@ class PokemonListFragment : Fragment() {
     private fun setData(list: PagingData<com.example.pokemonapp.model.Result>) {
         (binding.pokemonListRecyclerView.adapter as PokemonAdapter).submitData(lifecycle, list)
     }
+
 }

@@ -41,7 +41,12 @@ class InfoFragment : Fragment() {
                     height.text = it.height.toString() + dm
                     image.loadUrl(it.sprites.front_default)
                     backButton.setOnClickListener {
-                        parentFragmentManager.beginTransaction().replace(
+                        parentFragmentManager.beginTransaction().setCustomAnimations(
+                            R.animator.open_info_2,
+                            R.animator.close_info_2,
+                            R.animator.open_info,
+                            R.animator.close_info
+                        ).replace(
                             R.id.container,
                             PokemonListFragment()
                         ).commit()
@@ -49,7 +54,5 @@ class InfoFragment : Fragment() {
                 }
             }
         }
-
     }
-
 }

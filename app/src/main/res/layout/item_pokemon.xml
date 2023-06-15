@@ -9,6 +9,9 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_default"
         android:textColor="@color/black"
-        android:textSize="@dimen/text_size" />
+        android:clickable="true"
+        android:background="?android:attr/selectableItemBackground"
+        android:textSize="@dimen/text_size"
+        android:focusable="true" />
 
 </LinearLayout>

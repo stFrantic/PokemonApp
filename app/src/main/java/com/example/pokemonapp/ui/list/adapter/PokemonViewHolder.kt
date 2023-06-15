@@ -13,7 +13,6 @@ class PokemonViewHolder(
     fun bind(item: Result) {
         binding.name.run {
             text = item.name.toUpCase()
-            isClickable = true
             setOnClickListener{
                 onItemClicked(item.url)
             }
